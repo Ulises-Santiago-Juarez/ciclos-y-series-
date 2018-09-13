@@ -1,0 +1,103 @@
+#include <iostream>
+
+
+using namespace std;
+
+float logaritmo (int a, int b);
+float seno (int a, int b);
+float coseno (int a, int b);
+int potencia(int base, int expo);
+int factorial(int n);
+
+int main(){
+    int opcion, x, tamano;
+    cout<<"seleccione una opcion:" <<endl;
+    cout<<"1-calcular logaritmo natural" <<endl;
+    cout<<"2-calcular seno" <<endl;
+    cout<<"3-calcular coseno" <<endl;
+    cin>>opcion;
+    
+    do{
+        if(opcion ==1 ){
+            cout<<"ingresa el valor de x: ";
+            cin>>x;
+            cout<<endl <<"ingresa el tamaño: ";
+            cin>>tamano;
+            cout<<logaritmo(x, tamano);
+        }else{
+            if(opcion == 2){
+                cout<<"ingresa el valor de x: ";
+                cin>>x;
+                cout<<endl <<"ingresa el tamaño: ";
+                cin>>tamano;
+                cout<<seno(x, tamano);
+            }else{
+                if(opcion == 3){
+                    cout<<"ingresa el valor de x: ";
+                    cin>>x;
+                    cout<<endl <<"ingresa el tamaño: ";
+                    cin>>tamano;
+                    cout<<coseno(x, tamano); 
+                }
+            }
+        }
+        
+        cout<<"seleccione una opcion:" <<endl;
+        cout<<"1-calcular logaritmo natural" <<endl;
+        cout<<"2-calcular seno" <<endl;
+        cout<<"3-calcular coseno" <<endl;
+        cin>>opcion;
+        
+    }while(opcion != 0);
+    return 0;
+}
+
+
+
+
+float logaritmo (int a, int b){
+    float sum=0;
+    for(int i=1;i<=b;i++){
+        sum+=1/i*potencia((a-1)/a,i);
+    }
+    return sum;
+}
+float coseno (int a, int b){
+    float cos;
+    int den;
+    int sig=1;
+    for (int i=1;i<=b;i++,den+=2){
+        cos += potencia(a, den)/factorial(den)*sig;
+        sig*=-1;
+    }
+    return cos;
+    
+}
+
+float seno (int a, int b){
+    float seno;
+    for (int i=1;i<=b;i++){
+        seno += potencia(-1, i)* potencia(a, 2*i+1)/factorial(2*i+1);
+    }
+    return seno;
+}
+
+int potencia(int base, int expo)
+{
+    int pot=1;
+    for(int i=1;i<=expo;i++)
+    {
+        pot*=base;
+    }
+    return pot;
+}
+
+int factorial(int n)
+{
+    int fac=1;
+    for(int i=1;i<=n;i++)
+    {
+        fac*=i;
+    }
+    return fac;
+}
